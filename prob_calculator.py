@@ -24,23 +24,23 @@ class Hat:
                 ball = self.contents.pop(idx)
                 selections.append(ball)
                 count -= 1
+        else:
+            selections = self.contents
 
         return selections
 
 
 def experiment(hat, expected_balls, num_balls_drawn, num_experiments):
-    instance = hat
     matches = 0
     counter = num_experiments
 
     while (counter > 0):
+        instance = copy.deepcopy(hat)
         draw = instance.draw(num_balls_drawn)
-        isEqual = False
+        isEqual = True
 
         for ball in expected_balls:
-            if(draw.count(ball) == expected_balls[ball]):
-                isEqual = True
-            else:
+            if (draw.count(ball) < expected_balls[ball]):
                 isEqual = False
 
         if (isEqual):
